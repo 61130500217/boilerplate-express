@@ -1,13 +1,29 @@
 
-var express = require('express');
-var app = express();
-const mon = require('mongoose');
-let mongoose = mon();
-mongoose.connect(`${process.env.MONGO_URI}`, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  }
-  );
+const express = require('express');
+let app = express();
+const mongoose = require('mongoose');
+// const MongoClient = require('mongodb').MongoClient;
+
+
+app.get('/', (req, res ) => {
+    console.log("Hello wolrd");
+});
+// mongoose.connect(`${process.env.MONGO_URI}`, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+//   }
+//   );
+
+  const MongoClient = require('mongodb').MongoClient;
+  const uri = "mongodb+srv://sam:milkmilklovebank@mamon-2zq6x.mongodb.net/test?retryWrites=true&w=majority";
+  const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+  client.connect(err => {
+    const collection = client.db("test").collection("devices");
+    // perform actions on the collection object
+    client.close();
+  });
+  
+
 
 
 // --> 7)  Mount the Logger middleware here
