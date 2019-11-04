@@ -3,7 +3,11 @@ var express = require('express');
 var app = express();
 const mon = require('mongoose');
 let mongoose = mon();
-mongoose.connect(process.env.MONGO_URI);
+mongoose.connect(`${process.env.MONGO_URI}`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }
+  );
 
 
 // --> 7)  Mount the Logger middleware here
